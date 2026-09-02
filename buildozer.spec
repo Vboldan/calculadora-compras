@@ -13,6 +13,7 @@ fullscreen = 0
 android.archs = arm64-v8a
 android.accept_sdk_license = True
 p4a.commit = 957a3e5f8c270f7aa648ba185e5a68c1077a798d
+p4a.local_recipes = ./p4a-recipes
 
 [buildozer]
 log_level = 2
