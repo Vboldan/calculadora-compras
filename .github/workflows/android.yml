@@ -31,7 +31,7 @@ jobs:
           python -m pip install buildozer==1.6.0 cython==0.29.37
 
       - name: Gerar APK
-        run: buildozer android debug
+        run: yes | buildozer android debug
 
       - name: Publicar APK
         uses: actions/upload-artifact@v4
