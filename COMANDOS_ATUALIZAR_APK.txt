@@ -1,0 +1,122 @@
+GUIA PARA ATUALIZAR O APK
+==========================
+
+1. Entrar na pasta do projeto
+
+Comando:
+cd "/home/usuario/Área de trabalho/CALCULADORA.py"
+
+Descrição:
+Abre a pasta onde estão o script da calculadora, o main.py e a configuração do Buildozer.
+
+
+2. Ativar o ambiente virtual
+
+Comando:
+source venv/bin/activate
+
+Descrição:
+Ativa o ambiente Python usado pelo projeto.
+
+
+3. Verificar a sintaxe dos arquivos
+
+Comando:
+python3 -m py_compile calculadora_kivy_3.py main.py
+
+Descrição:
+Confirma se os arquivos Python não possuem erros de sintaxe antes do envio.
+
+
+4. Verificar problemas de formatação no Git
+
+Comando:
+git diff --check
+
+Descrição:
+Procura espaços indevidos e problemas simples nas alterações.
+
+
+5. Adicionar somente o script alterado
+
+Comando:
+git add calculadora_kivy_3.py
+
+Descrição:
+Prepara o script principal para ser incluído no próximo commit.
+
+Observação:
+Se você também alterar o main.py, use:
+git add calculadora_kivy_3.py main.py
+
+Se alterar o buildozer.spec, use:
+git add calculadora_kivy_3.py main.py buildozer.spec
+
+
+6. Criar um commit
+
+Comando:
+git commit -m "Atualiza calculadora"
+
+Descrição:
+Registra as alterações localmente com uma mensagem explicando o que foi feito.
+
+
+7. Enviar as alterações para o GitHub
+
+Comando:
+git push origin main
+
+Descrição:
+Envia o commit para o repositório GitHub e inicia automaticamente o workflow Android APK.
+
+
+8. Conferir a compilação
+
+Acesse:
+https://github.com/Vboldan/calculadora-compras/actions
+
+Descrição:
+Abra a execução mais recente e aguarde o status Success, indicado pela marca verde.
+
+
+9. Baixar o APK
+
+Procedimento:
+1. Abra a execução que terminou com Success.
+2. Role até a seção Artifacts.
+3. Clique em calculadora-compras-apk.
+4. Extraia o arquivo ZIP baixado.
+5. Dentro dele estará o arquivo APK.
+
+
+10. Instalar no celular
+
+Procedimento:
+1. Desinstale a versão anterior da calculadora, se necessário.
+2. Transfira o novo APK para o celular.
+3. Abra o APK e autorize a instalação de fontes desconhecidas, se solicitado.
+4. Instale a nova versão.
+
+
+COMANDO COMPLETO PARA ALTERAR SOMENTE O SCRIPT
+==============================================
+
+cd "/home/usuario/Área de trabalho/CALCULADORA.py"
+source venv/bin/activate
+python3 -m py_compile calculadora_kivy_3.py main.py
+git diff --check
+git add calculadora_kivy_3.py
+git commit -m "Atualiza calculadora"
+git push origin main
+
+
+IMPORTANTE
+==========
+
+- O arquivo main.py normalmente não precisa ser alterado.
+- O buildozer.spec só deve ser incluído no git add quando for alterado.
+- Cada git push inicia uma nova compilação no GitHub Actions.
+- O APK é gerado para Android arm64-v8a.
+- Se o build falhar, abra o log da etapa Gerar APK e procure o primeiro erro real.
+- Mensagens sobre Node.js deprecated geralmente são avisos, não a causa da falha.
