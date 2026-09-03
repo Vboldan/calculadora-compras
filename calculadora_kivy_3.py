@@ -2,7 +2,7 @@ import os # Importa a biblioteca para interagir com o sistema operacional (pasta
 from datetime import datetime # Importa a ferramenta para trabalhar com dados de data e hora
 
 try: # Inicia um bloco de tratamento de exceções (para evitar que o app quebre se faltar algo)
-    from jnius import autoclass # Tenta importar a ferramenta para usar recursos nativos do Android
+    from Fjnius import autoclass # Tenta importar a ferramenta para usar recursos nativos do Android
 except ( # Captura exceções caso o código não esteja rodando no celular Android
     ImportError, # Tipo de erro acionado quando a importação falha
     ModuleNotFoundError, # Tipo de erro acionado quando o módulo não é encontrado
@@ -322,7 +322,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
         box.add_widget(btn_ok) # Coloca na tela do aviso
 
         popup = Popup( # Invoca a classe nativa de janelas flutuantes Kivy
-            title=titulo, content=box, size_hint=(0.8, 0.20), auto_dismiss=False # Título, Conteúdo interno, 80% larg./20% alt., impede tocar fora pra fechar
+            title=titulo, content=box, size_hint=(0.8, 0.40), auto_dismiss=False # Título, Conteúdo interno, 80% larg./20% alt., impede tocar fora pra fechar
         ) # Fim da configuração do frame 
         btn_ok.bind(on_release=popup.dismiss) # Se usuário soltar o dedo do botão, dá comando ao popup para desaparecer
         popup.open() # Instância a tela na frente de tudo
