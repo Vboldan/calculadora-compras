@@ -184,7 +184,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
 
     def _focar_proximo(self, instancia, proximo_campo): # Função que lida com a transição do cursor (teclado piscando)
         instancia.focus = False # Desliga o foco do campo atual
-        Clock.schedule_once(lambda dt: self._focar_campo(proximo_campo), 0.03) # Agenda o próximo campo sem atrasar o teclado
+        Clock.schedule_once(lambda dt: self._focar_campo(proximo_campo), 0.06) # Agenda o próximo campo sem atrasar o teclado
 
     def _criar_painel_botoes(self): # Declara a função para a faixa de ações centrais
         box_btn = BoxLayout( # Cria o bloco contenedor horizontal
