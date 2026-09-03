@@ -62,7 +62,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
         root.add_widget(self._criar_status()) # Chama a função dos totais financeiros e insere
         root.add_widget(self._criar_lista_produtos()) # Chama a área da lista de itens e finaliza a tela
         
-        Clock.schedule_once(lambda dt: self._focar_campo(self.ent_limite), 0.2) # Manda focar no campo Limite 0.2s após abrir o app 
+        Clock.schedule_once(lambda dt: self._focar_campo(self.ent_limite), 0.05) # Manda focar no campo Limite após abrir o app
 
         return root # Devolve o layout principal (com todas as peças montadas) para exibição na tela
 
@@ -184,7 +184,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
 
     def _focar_proximo(self, instancia, proximo_campo): # Função que lida com a transição do cursor (teclado piscando)
         instancia.focus = False # Desliga o foco do campo atual
-        Clock.schedule_once(lambda dt: self._focar_campo(proximo_campo), 0.08) # Agenda em frações de segundo para o Kivy não engasgar
+        Clock.schedule_once(lambda dt: self._focar_campo(proximo_campo), 0.03) # Agenda o próximo campo sem atrasar o teclado
 
     def _criar_painel_botoes(self): # Declara a função para a faixa de ações centrais
         box_btn = BoxLayout( # Cria o bloco contenedor horizontal
@@ -383,7 +383,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
             self.ent_preco.text = "" # Esvazia campo preço
             self.ent_qtd.text = "1" # Restaura quantidade 1 defaut
 
-            Clock.schedule_once(lambda dt: self._focar_campo(self.ent_produto), 0.08) # Move o teclado do celular de volta pra caixa Nome
+            Clock.schedule_once(lambda dt: self._focar_campo(self.ent_produto), 0.03) # Move o teclado do celular de volta pra caixa Nome
             self.atualizar_status() # Roda atualização na barra verde de Dinheiro x Gasto
 
         except ValueError: # Caso estoure no bloco Try
@@ -426,7 +426,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
         self.ent_qtd.text = "1" # Restaura visual
 
         self.atualizar_status() # Bota rodape pra verde em R$ 0,00
-        Clock.schedule_once(lambda dt: self._focar_campo(self.ent_limite), 0.08) # Manda foco pro primeirão!
+        Clock.schedule_once(lambda dt: self._focar_campo(self.ent_limite), 0.03) # Manda foco pro primeirão!
 
     def salvar_txt(self): # Rotina ativada no botão de Salvar Nota (Geradora da NFe local)
         if not self.produtos: # Bloqueio de salvamento vazio
@@ -467,7 +467,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
 
             self.caminho_ultimo_arquivo = caminho # Armazena em variável para o botão ENVIAR saber que arquivo puxar depois!
             self.btn_env.disabled = False # Destrava no sistema o Botão roxinho de compartilhamento 
-            self.mostrar_alerta("Sucesso", "Nota salva") # Mostra feliz janela 
+            self.mostrar_alerta("Sucesso", f"Nota salva em:\n{caminho}") # Mostra onde a nota foi salva
             self.limpar_tela() # Zera tela inteira chamando rotina 
 
         except Exception as e: # Caso trave (Permissão Negada Android, disco cheio)
