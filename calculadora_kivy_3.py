@@ -391,7 +391,6 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
 
     def _focar_campo(self, campo): # Funçao de conveniência focadora
         campo.focus = True # Dá o alvo elétrico da tela
-        campo.show_keyboard() # Abre forçado o teclado touch screen
 
     def remover_produto(self): # Rotina do botão de Excluir 
         if not self.item_selecionado: # Se o cara apertou "Excluir" sem tocar em ninguém
