@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,jpeg,kv,atlas,txt
 source.exclude_dirs = venv,build,dist,__pycache__
 source.exclude_exts = spec
 version = 1.0.0
-requirements = python3,kivy==2.3.1
+requirements = python3,kivy==2.3.1,filetype==1.2.0
 orientation = portrait
 fullscreen = 0
 android.archs = arm64-v8a
