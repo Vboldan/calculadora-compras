@@ -433,11 +433,11 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
             self.mostrar_alerta("Aviso", "Nenhum produto na lista!") # Exibe janela
             return # Aborta processo de I/O em arquivo
 
-        pasta = ( # Mapeador de ambiente Android vs PC
-            "/storage/emulated/0/Python/NOTA FISCAL/" # Tenta a estrutura clássica da raiz do Android (Downloads)
-            if os.path.exists("/storage/emulated/0/") # Testa via import OS se esse dispositivo tem esse diretório
-            else os.path.expanduser("~/Área de trabalho/") # Fallback: se estiver rodando via shell Linux/PC bota no desktop
-        ) # Fim do ternário de pasta
+        pasta = ( # Escolhe uma pasta que o sistema permita gravar
+            self.user_data_dir # No Android, usa o armazenamento privado do aplicativo
+            if autoclass is not None # Detecta a execução Android pelo pyjnius
+            else os.path.expanduser("~/Área de trabalho/") # No Linux, mantém o arquivo na área de trabalho
+        ) # Fim da escolha de pasta
 
         try: # Proteção de salvamento de arquivo (costuma dar erro de permissão Android)
             os.makedirs(pasta, exist_ok=True) # Cria árvore de pastas a força (ignorando se já houver uma)
