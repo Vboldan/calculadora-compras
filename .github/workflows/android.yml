@@ -17,6 +17,12 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
       - name: Instalar dependências do sistema
         run: |
           sudo apt-get update
