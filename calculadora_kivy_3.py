@@ -1,16 +1,20 @@
 import os # Importa a biblioteca para interagir com o sistema operacional (pastas e arquivos)
 from datetime import datetime # Importa a ferramenta para trabalhar com dados de data e hora
 
-try: # Inicia um bloco de tratamento de exceções (para evitar que o app quebre se faltar algo)
-    from Fjnius import autoclass # Tenta importar a ferramenta para usar recursos nativos do Android
-except ( # Captura exceções caso o código não esteja rodando no celular Android
-    ImportError, # Tipo de erro acionado quando a importação falha
-    ModuleNotFoundError, # Tipo de erro acionado quando o módulo não é encontrado
+# Evita que o Kivy tente usar xclip/xsel em desktop Linux quando estes comandos não existem.
+os.environ.setdefault("KIVY_CLIPBOARD", "dummy")
+
+try:  # Inicia um bloco de tratamento de exceções (para evitar que o app quebre se faltar algo)
+    from jnius import autoclass  # type: ignore[import-not-found]  # Tenta importar a ferramenta para usar recursos nativos do Android
+except (  # Captura exceções caso o código não esteja rodando no celular Android
+    ImportError,  # Tipo de erro acionado quando a importação falha
+    ModuleNotFoundError,  # Tipo de erro acionado quando o módulo não é encontrado
 ):  # jnius existe apenas em ambiente Android/Kivy # Comentário original mantido
-    autoclass = None # Define a variável como nula se o jnius não estiver disponível no sistema
+    autoclass = None  # Define a variável como nula se o jnius não estiver disponível no sistema
 
 from kivy.app import App # Importa a classe principal base para criar o aplicativo Kivy
 from kivy.clock import Clock # Importa o relógio interno para agendar o tempo das funções
+from kivy.config import Config # Importa as configurações globais do Kivy antes da janela abrir
 from kivy.core.window import Window # Importa a janela principal do aplicativo
 from kivy.metrics import dp # Importa o medidor de pixels independentes de densidade de tela
 from kivy.uix.boxlayout import BoxLayout # Importa o organizador de layout de caixas (horizontal/vertical)
@@ -21,6 +25,16 @@ from kivy.uix.popup import Popup # Importa a estrutura de janela flutuante de al
 from kivy.uix.scrollview import ScrollView # Importa a estrutura para criar uma visualização com barra de rolagem
 from kivy.uix.textinput import TextInput # Importa o campo retangular de entrada de texto para digitação
 
+Config.set("graphics", "width", "420")
+Config.set("graphics", "height", "760")
+Config.set("graphics", "minimum_width", "360")
+Config.set("graphics", "minimum_height", "620")
+Config.set("graphics", "resizable", "1")
+Config.set("graphics", "borderless", "0")
+
+Window.size = (420, 760)
+Window.minimum_width = 360
+Window.minimum_height = 620
 Window.softinput_mode = "below_target" # Configura o teclado do celular para subir a tela e não cobrir o texto
 Window.clearcolor = (0.6, 0.4, 0.5, 1) # Define a cor de fundo padrão da janela principal do aplicativo
 
@@ -111,6 +125,8 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
             "height": dp(32),  # Altura fixa para os campos de entrada # Determina a grossura do campo visual
             "write_tab": False,  # Desativar o tab para escrita # Evita digitar um tab invisível no campo
             "input_type": "text",  # Tipo de entrada como texto para flexibilidade # Ativa o teclado geral (padrão)
+            "font_size": "14sp",  # Ajusta a legibilidade dos campos de entrada
+            "padding": [dp(8), dp(6)],  # Garante espaçamento interno do texto dentro do campo
         } # Finaliza o dicionário de padronização
 
         def criar_campo(texto_lbl, eh_float=False, eh_qtd=False): # Função embutida rápida para criar a dupla Rótulo+Campo
@@ -156,7 +172,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
 
         self.ent_preco.size_hint_x = 0.5 # Força o campo de Preço a ocupar metade dessa sub-caixa
         lbl_qt = Label( # Cria um micro-texto "QT" para ficar entre preço e quantidade
-            text="QT:", bold=True, size_hint=(0.2, 1), halign="center", valign="middle" # Ocupa 20%, negrito e centralizado
+            text="QT:", bold=True, size_hint=(0.2, 1), halign="center", valign="middle", color=(1, 1, 1, 1) # Ocupa 20%, negrito e centralizado
         ) # Fim do texto QT
         lbl_qt.bind(size=lbl_qt.setter("text_size")) # Regra padrão de alinhamento visual do Kivy
         _, self.ent_qtd = criar_campo("", eh_qtd=True) # Cria o campo quantidade ignorando o rótulo ("_") porque já fizemos o QT acima

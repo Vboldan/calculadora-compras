@@ -7,7 +7,7 @@ source.include_exts = py,png,jpg,jpeg,kv,atlas,txt
 source.exclude_dirs = venv,build,dist,__pycache__
 source.exclude_exts = spec
 version = 1.0.0
-icon.filename = %(source.dir)s/icone.png
+icon.filename = %(source.dir)s/icome.png
 requirements = python3,kivy==2.3.1,filetype==1.2.0
 orientation = portrait
 fullscreen = 0
@@ -19,7 +19,8 @@ p4a.local_recipes = ./p4a-recipes
 [buildozer]
 log_level = 2
 warn_on_root = 1
-bin_dir = ./bin
+build_dir = /tmp/calculadora_buildozer
+bin_dir = /tmp/calculadora_bin
 
 [android]
 android.api = 35
