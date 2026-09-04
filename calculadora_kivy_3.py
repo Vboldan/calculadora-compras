@@ -441,7 +441,7 @@ class CalculadoraKivyFinal(App): # Cria a classe principal do aplicativo herdand
         self.ent_qtd.text = "1" # Restaura visual
 
         self.atualizar_status() # Bota rodape pra verde em R$ 0,00
-        Clock.schedule_once(lambda dt: self._focar_campo(self.ent_limite), 0.03) # Manda foco pro primeirão!
+        Clock.schedule_once(lambda dt: self._focar_campo(self.ent_limite), 0.06) # Manda foco pro primeirão!
 
     def salvar_txt(self): # Rotina ativada no botão de Salvar Nota (Geradora da NFe local)
         if not self.produtos: # Bloqueio de salvamento vazio

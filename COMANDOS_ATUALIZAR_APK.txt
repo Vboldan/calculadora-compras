@@ -118,5 +118,5 @@ IMPORTANTE
 - O buildozer.spec só deve ser incluído no git add quando for alterado.
 - Cada git push inicia uma nova compilação no GitHub Actions.
 - O APK é gerado para Android arm64-v8a.
-- Se o build falhar, abra o log da etapa Gerar APK e procure o primeiro erro real.
+- Se o build falhar, abra o log da etapa Gerar APK e procure o primeiro erro real.git commit -m "Atualiza calculadora
 - Mensagens sobre Node.js deprecated geralmente são avisos, não a causa da falha.
